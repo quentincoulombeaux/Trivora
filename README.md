@@ -1,81 +1,80 @@
 # Trivora
 
-**Plateforme de gestion de la performance pour triathlètes et sportifs d'endurance.**
-Course à pied · Cyclisme · Natation.
+**Performance management platform for triathletes and endurance athletes.**
+Running · Cycling · Swimming.
 
-Trivora n'est pas un simple carnet d'entraînement : c'est une fondation pensée pour
-accompagner un athlète sur plusieurs années (planification, suivi, analyses, objectifs,
-records, charge d'entraînement).
+Trivora is more than a training log: it's a foundation built to support an athlete
+over several years (planning, tracking, analytics, goals, personal records,
+training load).
 
-## Lancer l'application
+## Running the app
 
-Prérequis : **Node.js 18.18+** (recommandé : Node 20 ou 22).
+Requirements: **Node.js 18.18+** (recommended: Node 20 or 22).
 
 ```bash
-# 1. Installer les dépendances
+# 1. Install dependencies
 npm install
 
-# 2. Lancer en développement (http://localhost:3000)
+# 2. Run in development mode (http://localhost:3000)
 npm run dev
 ```
 
-Pour une version optimisée :
+For an optimized build:
 
 ```bash
 npm run build
 npm run start
 ```
 
-## Stack technique
+## Tech stack
 
 - **Next.js 14** (App Router) + **React 18** + **TypeScript**
-- **Tailwind CSS** — design system clair/sombre avec tokens CSS
-- **Framer Motion** — animations et micro-interactions
-- **Recharts** — graphiques interactifs (style TradingView)
-- **Zustand** (+ persist) — état global persisté dans le navigateur (localStorage)
+- **Tailwind CSS** — light/dark design system with CSS tokens
+- **Framer Motion** — animations and micro-interactions
+- **Recharts** — interactive charts (TradingView style)
+- **Zustand** (+ persist) — global state persisted in the browser (localStorage)
 - **lucide-react**, **date-fns**
 
-## Fonctionnalités (v1)
+## Features (v1)
 
-| Page | Contenu |
+| Page | Content |
 |------|---------|
-| **Dashboard** | Accueil personnalisé, prochains entraînements, records (run/vélo/natation), résumé d'activité, répartition des disciplines, objectifs |
-| **Course / Vélo / Natation** | Saisie de séances avec calculs automatiques (allure, vitesse, SWOLF), détection de records, tendances |
-| **Calendrier** | Vues semaine/mois, planification de séances futures, glisser-déposer pour replanifier |
-| **Historique** | Recherche, filtres (discipline / période), tri, pagination, vue tableau + chronologie |
-| **Analyses** | Volume, charge d'entraînement (modèle CTL/ATL), tendances par discipline |
-| **Coach IA** | Page placeholder (« disponible prochainement ») |
-| **Paramètres** | Profil, langue (FR/EN), unités (métrique/impérial), thème, export/import JSON, export CSV |
+| **Dashboard** | Personalized home, upcoming workouts, personal records (run/bike/swim), activity summary, discipline breakdown, goals |
+| **Running / Cycling / Swimming** | Log sessions with automatic calculations (pace, speed, SWOLF), record detection, trends |
+| **Calendar** | Week/month views, scheduling future sessions, drag-and-drop to reschedule |
+| **History** | Search, filters (discipline / period), sorting, pagination, table + timeline views |
+| **Analytics** | Volume, training load (CTL/ATL model), trends by discipline |
+| **AI Coach** | Placeholder page ("coming soon") |
+| **Settings** | Profile, language (FR/EN), units (metric/imperial), theme, JSON export/import, CSV export |
 
-## Données
+## Data
 
-Toutes les données vivent dans le navigateur (localStorage). Au premier lancement,
-un jeu de données d'exemple (~6 mois d'entraînement) est chargé pour explorer l'app.
-Réinitialisez ou videz tout depuis **Paramètres → Données & sauvegarde**.
+All data lives in the browser (localStorage). On first launch, a sample dataset
+(~6 months of training) is loaded so you can explore the app.
+Reset or clear everything from **Settings → Data & backup**.
 
-Sauvegarde / restauration : export et import JSON complet (profil + séances + objectifs).
+Backup / restore: full JSON export and import (profile + sessions + goals).
 
-## Architecture & évolutivité
+## Architecture & scalability
 
 ```
 src/
-├── app/            # Routes (App Router) — une vraie page par section
-├── components/     # UI réutilisable (cards, modal de séance, charts, navigation)
+├── app/            # Routes (App Router) — one real page per section
+├── components/     # Reusable UI (cards, session modal, charts, navigation)
 └── lib/
-    ├── types.ts        # Modèle de données
-    ├── store.ts        # Zustand + persistance localStorage
-    ├── calc.ts         # Allure, SWOLF, charge, détection de records
-    ├── selectors.ts    # Séries temporelles pour les graphiques
-    ├── format.ts       # Formatage unités métrique/impérial
-    └── i18n/           # Internationalisation FR/EN
+    ├── types.ts        # Data model
+    ├── store.ts        # Zustand + localStorage persistence
+    ├── calc.ts         # Pace, SWOLF, load, record detection
+    ├── selectors.ts    # Time series for the charts
+    ├── format.ts       # Metric/imperial unit formatting
+    └── i18n/           # FR/EN internationalization
 ```
 
-Le modèle de données et la couche de stockage sont conçus pour migrer vers un backend
-(API + base de données) et accueillir l'import GPX/FIT/TCX et les intégrations
-Garmin / Coros / Strava / Polar / Suunto.
+The data model and storage layer are designed to migrate to a backend
+(API + database) and to support GPX/FIT/TCX import as well as
+Garmin / Coros / Strava / Polar / Suunto integrations.
 
-## Pistes v2
+## v2 roadmap
 
-Coach IA, parsing réel des fichiers GPX/FIT/TCX, intégrations montres connectées,
-modèles de séances et semaines récurrentes, backend multi-appareils.
-"# Trivora" 
+AI Coach, real GPX/FIT/TCX file parsing, smartwatch integrations,
+workout and recurring-week templates, multi-device backend.
